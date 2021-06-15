@@ -67,3 +67,24 @@ module.exports.destroySession = function(req, res){
 
     return res.redirect('/');
 }
+module.exports.upload= async function(req,res)
+{
+    
+    let user= await User.findById(req.user.id);
+    console.log("loaded",user);
+    User.uploadedAvatar(req,res,function(err)
+    {
+        if(err){console.log('*******')};
+        console.log('thid',req.file.filename);
+        if(req.file)
+        {
+            user.avatar=User.avatarPath + '/' + req.file.filename;
+            console.log("user_Ava",user.avatar);
+        }
+        
+    });
+    user.save();
+    res.redirect('back');
+
+
+}

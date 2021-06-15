@@ -1,7 +1,15 @@
         <link rel="stylesheet" href="/css/user_profile.css">
-        <h1>
+        <!-- <h1>
             Codeial / Profile Page
-        </h1>
+        </h1> -->
+        <% if(user.id){%>
 
+            <form action="/users/upload-image" enctype="multipart/form-data" method="POST">
+                <input type="file" name="avatar" placeholder="upload image">
+                <input type="submit" value="upload">
+            </form>
+        <%}%>
+        
+        <img src="<%=user.avatar %>" alt="<%=user.name%>" width="100">
         <p><%= user.name %></p>
         <p><%= user.email %></p>

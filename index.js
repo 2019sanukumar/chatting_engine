@@ -20,11 +20,13 @@ app.use(sassMiddleware({
     prefix:'/css'
 
 }));
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+// make the uploads path available to the browser means to ejs file
+app.use('/uploads',express.static(__dirname +'/uploads'));
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
